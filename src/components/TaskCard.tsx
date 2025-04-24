@@ -8,11 +8,11 @@ import EditIcon from "@mui/icons-material/Edit";
 interface TaskCardProps {
   task: Task,
   index: number,
+  onEdit: (task: Task) => void,
 }
 
 
-function TaskCard({ task, index }: TaskCardProps) {
-  const updateTask = useTaskStore((state) => state.updateTask);
+function TaskCard({ task, index, onEdit }: TaskCardProps) {
   const deleteTask = useTaskStore((state) => state.deleteTask);
 
   return (
@@ -27,11 +27,11 @@ function TaskCard({ task, index }: TaskCardProps) {
               <Typography>{task.title}</Typography>
               <Typography>{task.description}</Typography>
             </CardContent>
-            <IconButton>
-              <EditIcon></EditIcon>
+            <IconButton onClick={() => onEdit(task)}>
+              <EditIcon/>
             </IconButton>
             <IconButton onClick={() => {deleteTask(task.id)}}>
-              <DeleteIcon></DeleteIcon>
+              <DeleteIcon/>
             </IconButton>
           </Stack>
         </Card>
